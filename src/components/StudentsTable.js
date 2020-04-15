@@ -21,8 +21,7 @@ const SortButton = ({ fieldToSortBy, sortOrder, activeSort, onClick }) => {
   return (
     <span
       className={'sort-button' + (activeSort === fieldToSortByWithOrder ? ' active' : '')}
-      data-field-to-sort-by-with-order={fieldToSortByWithOrder}
-      onClick={onClick}
+      onClick={() => { onClick(fieldToSortByWithOrder); }}
     >
       <i className={'fas fa-arrow-' + (sortOrder === 'DESC' ? 'up' : 'down')} />
     </span>
@@ -39,8 +38,7 @@ class StudentsTable extends React.Component {
     this.handleSortButtonClicked = this.handleSortButtonClicked.bind(this);
   }
 
-  handleSortButtonClicked (event) {
-    const fieldToSortByWithOrder = event.currentTarget.dataset.fieldToSortByWithOrder;
+  handleSortButtonClicked (fieldToSortByWithOrder) {
     if (this.state.activeSort === fieldToSortByWithOrder) {
       this.setState({ sortedStudents: students, activeSort: null });
     } else {
